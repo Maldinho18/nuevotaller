@@ -19,12 +19,15 @@ function getTotalCredits(series) {
 function showDetail(id) {
     var selectSerie = dataSeries.find(function (serie) { return serie.id === id; });
     if (selectSerie) {
+        console.log(selectSerie.image);
         var serieTitle = document.getElementById('serie-title');
         var serieImage = document.getElementById('serie-image');
         var serieDescripcion = document.getElementById('serie-description');
+        var serieChannel = document.getElementById('serie-channel');
         serieTitle.innerText = selectSerie.name;
         serieImage.src = selectSerie.image;
         serieDescripcion.innerText = selectSerie.description;
+        serieChannel.innerHTML = "<a href=\"".concat(selectSerie.url, "\" target=\"_blank\">").concat(selectSerie.channel, "</a>");
         var modal = document.getElementById('serie-detail');
         modal.style.display = 'block';
     }

@@ -38,13 +38,18 @@ function getTotalCredits(series: Serie[]): number {
 function showDetail(id: number): void {
   const selectSerie = dataSeries.find(serie => serie.id === id)
   if (selectSerie){
+
+    console.log(selectSerie.image);
+
     const serieTitle = document.getElementById('serie-title')!;
     const serieImage = document.getElementById('serie-image') as HTMLImageElement;
     const serieDescripcion = document.getElementById('serie-description')!;
+    const serieChannel = document.getElementById('serie-channel')!;
 
     serieTitle.innerText = selectSerie.name;
     serieImage.src = selectSerie.image;
     serieDescripcion.innerText = selectSerie.description;
+    serieChannel.innerHTML = `<a href="${selectSerie.url}" target="_blank">${selectSerie.channel}</a>`;
 
     const modal = document.getElementById('serie-detail')!;
     modal.style.display = 'block';
