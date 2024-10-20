@@ -2,6 +2,13 @@ import { Serie } from './serie.js';
 
 import { dataSeries } from './dataSeries.js';
 
+declare global {
+  interface Window {
+    showDetail: (id: number) => void;
+    closeModal: () => void;
+  }
+}
+
 let datasTbody: HTMLElement = document.getElementById('series')!;
 let totalCreditElm: HTMLElement = document.getElementById("total-credits")!;
 
@@ -27,3 +34,29 @@ function getTotalCredits(series: Serie[]): number {
   series.forEach((serie) => promedioSerie = promedioSerie + serie.seasons);
   return promedioSerie/series.length;
 }
+
+function showDetail(id: number): void {
+  const selectSerie = dataSeries.find(serie => serie.id === id)
+  if (selectSerie){
+    const serieTitle = document.getElementById('serie-title')!;
+    const serieImage = document.getElementById('serie-image') as HTMLImageElement;
+    const serieDescripcion = document.getElementById('serie-description')!;
+
+    serieTitle.innerText = selectSerie.name;
+    serieImage.src = selectSerie.image;
+    serieDescripcion.innerText = selectSerie.description;
+
+    const modal = document.getElementById('serie-detail')!;
+    modal.style.display = 'block';
+  }
+
+}
+
+function closeModal(): void {
+  const modal = document.getElementById('serie-detail')!;
+  modal.style.display = 'none';
+}
+
+window.showDetail = showDetail;
+window.closeModal = closeModal;
+

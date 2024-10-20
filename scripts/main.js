@@ -16,3 +16,22 @@ function getTotalCredits(series) {
     series.forEach(function (serie) { return promedioSerie = promedioSerie + serie.seasons; });
     return promedioSerie / series.length;
 }
+function showDetail(id) {
+    var selectSerie = dataSeries.find(function (serie) { return serie.id === id; });
+    if (selectSerie) {
+        var serieTitle = document.getElementById('serie-title');
+        var serieImage = document.getElementById('serie-image');
+        var serieDescripcion = document.getElementById('serie-description');
+        serieTitle.innerText = selectSerie.name;
+        serieImage.src = selectSerie.image;
+        serieDescripcion.innerText = selectSerie.description;
+        var modal = document.getElementById('serie-detail');
+        modal.style.display = 'block';
+    }
+}
+function closeModal() {
+    var modal = document.getElementById('serie-detail');
+    modal.style.display = 'none';
+}
+window.showDetail = showDetail;
+window.closeModal = closeModal;
